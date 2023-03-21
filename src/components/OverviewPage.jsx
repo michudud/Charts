@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "./styles/Container.styled";
+import BarChart from "./BarChart";
+import { ChartContainer } from "./styles/ChartContainer.styled";
+import { FlexColContainer } from "./styles/Container.styled";
 import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
 
 const OverviewPage = () => {
-  const [dataForCharts, setDataForCharts] = useState([[]]);
+  const [xAxisName, setXAxisName] = useState("X");
+  const [yAxisName, setYAxisName] = useState("Y");
+  const [xAxisData, setXAxisData] = useState([]);
+  const [yAxisData, setYAxisData] = useState([]);
 
-  const collumnsNumber = 6;
+  const columnsNumber = 6;
   useEffect(function tableWithRandomDataSets() {
-    let dataSets = [["X", "Y"]];
-    for (let i = 0; i < collumnsNumber; i++) {
+    let xData = [];
+    let yData = [];
+    for (let i = 0; i < columnsNumber; i++) {
       let randomValue = Math.floor(Math.random() * 100 + 1);
-      dataSets.push([i + 1, randomValue]);
+      xData.push(i + 1);
+      yData.push(randomValue);
     }
-    setDataForCharts(dataSets);
+    setXAxisData(xData);
+    setYAxisData(yData);
   }, []);
 
   const updateData = (e, index, index2) => {
@@ -24,18 +32,14 @@ const OverviewPage = () => {
     setDataForCharts(newData);
   };
 
-  useEffect(() => {
-    console.log(dataForCharts);
-  }, [dataForCharts]);
-
   return (
-    <Container>
+    <FlexColContainer>
       <Menu>
         <DataTable>
           <thead>
             <tr>
               <th>Axis</th>
-              <th colSpan={collumnsNumber}>Data</th>
+              <th colSpan={columnsNumber}>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -45,24 +49,26 @@ const OverviewPage = () => {
                   type="text"
                   defaultValue="X"
                   onChange={(e) => {
-                    updateData(e, 0, 0);
+                    setXAxisName(e.target.value);
                   }}
                 />
               </td>
-              {dataForCharts.map((dataSet, axisIndex) => {
-                if (axisIndex > 0) {
-                  return (
-                    <td>
-                      <input
-                        type="text"
-                        defaultValue={dataSet[0]}
-                        onChange={(e) => {
-                          updateData(e, axisIndex, 0);
-                        }}
-                      />
-                    </td>
-                  );
-                }
+              {xAxisData.map((dataSet, axisIndex) => {
+                return (
+                  <td
+                    key={dataSet + "_" + axisIndex + "_" + new Date().getTime()}
+                  >
+                    <input
+                      type="text"
+                      defaultValue={dataSet}
+                      onChange={(e) => {
+                        const newData = [...xAxisData];
+                        newData[axisIndex] = e.target.value;
+                        setXAxisData(newData);
+                      }}
+                    />
+                  </td>
+                );
               })}
             </tr>
             <tr>
@@ -71,30 +77,41 @@ const OverviewPage = () => {
                   type="text"
                   defaultValue="Y"
                   onChange={(e) => {
-                    updateData(e, 0, 1);
+                    setYAxisName(e.target.value);
                   }}
                 />
               </td>
-              {dataForCharts.map((dataSet, dataIndex) => {
-                if (dataIndex > 0) {
-                  return (
-                    <td>
-                      <input
-                        type="number"
-                        defaultValue={dataSet[1]}
-                        onChange={(e) => {
-                          updateData(e, dataIndex, 1);
-                        }}
-                      />
-                    </td>
-                  );
-                }
+              {yAxisData.map((dataSet, dataIndex) => {
+                return (
+                  <td
+                    key={dataSet + "_" + dataIndex + "_" + new Date().getTime()}
+                  >
+                    <input
+                      type="number"
+                      defaultValue={dataSet}
+                      onChange={(e) => {
+                        const newData = [...yAxisData];
+                        newData[dataIndex] = Number(e.target.value);
+                        setYAxisData(newData);
+                      }}
+                    />
+                  </td>
+                );
               })}
             </tr>
           </tbody>
         </DataTable>
       </Menu>
-    </Container>
+
+      <ChartContainer>
+        <BarChart
+          xAxisName={xAxisName}
+          yAxisName={yAxisName}
+          xAxisData={xAxisData}
+          yAxisData={yAxisData}
+        />
+      </ChartContainer>
+    </FlexColContainer>
   );
 };
 
