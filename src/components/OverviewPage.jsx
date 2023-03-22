@@ -6,8 +6,8 @@ import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
 
 const OverviewPage = () => {
-  const [xAxisName, setXAxisName] = useState("X");
-  const [yAxisName, setYAxisName] = useState("Y");
+  const [xAxisName, setXAxisName] = useState("X-axis");
+  const [yAxisName, setYAxisName] = useState("Y-axis");
   const [xAxisData, setXAxisData] = useState([]);
   const [yAxisData, setYAxisData] = useState([]);
 

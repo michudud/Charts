@@ -15,7 +15,7 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
         x="30px"
         y="30px"
         width="calc(100% - 60px)"
-        height="calc(100% - 60px)"
+        height="calc(100% - 80px)"
       >
         <svg y="10px" width="calc(100% - 10px)" height="calc(100% - 10px)">
           {yAxisData.map((dataSet, index) => {
@@ -38,32 +38,45 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
             );
           })}
         </svg>
-
         {/* axis */}
-        <line x1="0" y1="0" x2="0" y2="100%" stroke="black" strokeWidth="3px" />
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="100%"
+          stroke="#404040"
+          strokeWidth="3px"
+        />
         <line
           x1="0"
           y1="100%"
           x2="100%"
           y2="100%"
-          stroke="black"
+          stroke="#404040"
           strokeWidth="3px"
         />
         {/* axis */}
       </svg>
+      {/* axis-name */}
       <svg
         x="30px"
         y="calc(100% - 30px)"
         width="calc(100% - 60px)"
         height="30px"
       >
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
+        <text
+          x="50%"
+          y="50%"
+          dominantBaseline="middle"
+          textAnchor="middle"
+          fill="#404040"
+          font-weight="bold"
+        >
           {xAxisName}
         </text>
       </svg>
-
       <svg
-        x="5px"
+        x="7.5px"
         y={`calc(50% - ${
           verticalTextSvg.current
             ? verticalTextSvg.current.getBBox().width / 2
@@ -79,10 +92,46 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           text-anchor="end"
           dominant-baseline="hanging"
           transform="rotate(-90)"
+          fill="#404040"
+          font-weight="bold"
         >
           {yAxisName}
         </text>
       </svg>
+      {/* axis-name */}
+      {/* axis-data */}
+      <svg
+        x="30px"
+        y="calc(100% - 50px)"
+        width="calc(100% - 60px)"
+        height="20px"
+      >
+        <svg width="calc(100% - 10px)" height="100%">
+          {xAxisData.map((dataSet, index) => {
+            return (
+              <svg
+                x={index * barWidth + "%"}
+                y="2px"
+                width={barWidth + "%"}
+                height="18px"
+                key={dataSet + "_" + index + "_" + new Date().getTime()}
+              >
+                <text
+                  x="50%"
+                  y="50%"
+                  fontSize="14px"
+                  fill="#404040"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  {dataSet}
+                </text>
+              </svg>
+            );
+          })}
+        </svg>
+      </svg>
+      {/* axis-data */}
     </svg>
   );
 };
