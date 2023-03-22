@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BarChart from "./BarChart";
 import { ChartContainer } from "./styles/ChartContainer.styled";
 import { FlexColContainer } from "./styles/Container.styled";
@@ -23,14 +23,6 @@ const OverviewPage = () => {
     setXAxisData(xData);
     setYAxisData(yData);
   }, []);
-
-  const updateData = (e, index, index2) => {
-    const newData = [...dataForCharts];
-    let newValue = e.target.value;
-    index > 0 && index2 === 1 ? (newValue = Number(newValue)) : null;
-    newData[index][index2] = newValue;
-    setDataForCharts(newData);
-  };
 
   return (
     <FlexColContainer>

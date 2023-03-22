@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
   const barWidth = 100 / yAxisData.length;
   const maxBarHeight = Math.max.apply(Math, yAxisData);
 
+  const verticalTextSvg = useRef();
+  if (verticalTextSvg.current) {
+    console.log(verticalTextSvg.current.getBBox().width);
+  }
+
   return (
     <svg width="100%" height="100%">
       <svg
-        x="20px"
-        y="20px"
-        width="calc(100% - 40px)"
-        height="calc(100% - 40px)"
+        x="30px"
+        y="30px"
+        width="calc(100% - 60px)"
+        height="calc(100% - 60px)"
       >
         <svg y="10px" width="calc(100% - 10px)" height="calc(100% - 10px)">
           {yAxisData.map((dataSet, index) => {
@@ -20,10 +25,15 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                 y={`calc(100% - ${(dataSet / maxBarHeight) * 100}%)`}
                 width={barWidth + "%"}
                 height={(dataSet / maxBarHeight) * 100 + "%"}
-                fill="red"
                 key={dataSet + "_" + index + "_" + new Date().getTime()}
               >
-                <rect x="20%" y="0" width="60%" height="100%" />
+                <rect
+                  x="20%"
+                  y="0"
+                  width="60%"
+                  height="100%"
+                  fill="lightblue"
+                />
               </svg>
             );
           })}
@@ -40,6 +50,38 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           strokeWidth="3px"
         />
         {/* axis */}
+      </svg>
+      <svg
+        x="30px"
+        y="calc(100% - 30px)"
+        width="calc(100% - 60px)"
+        height="30px"
+      >
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
+          {xAxisName}
+        </text>
+      </svg>
+
+      <svg
+        x="5px"
+        y={`calc(50% - ${
+          verticalTextSvg.current
+            ? verticalTextSvg.current.getBBox().width / 2
+            : 0
+        }px)`}
+        width="30px"
+        height="calc(100% - 60px)"
+      >
+        <text
+          ref={verticalTextSvg}
+          x="0"
+          y="0"
+          text-anchor="end"
+          dominant-baseline="hanging"
+          transform="rotate(-90)"
+        >
+          {yAxisName}
+        </text>
       </svg>
     </svg>
   );
