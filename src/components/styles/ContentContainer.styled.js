@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-export const Menu = styled.div`
-  height: 200px;
+export const ContentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #404040;
+  flex-direction: column;
 `;

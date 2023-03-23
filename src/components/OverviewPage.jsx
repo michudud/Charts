@@ -4,6 +4,7 @@ import { ChartContainer } from "./styles/ChartContainer.styled";
 import { FlexColContainer } from "./styles/FlexContainer.styled";
 import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
+import { ContentContainer } from "./styles/ContentContainer.styled";
 
 const OverviewPage = () => {
   const [xAxisName, setXAxisName] = useState("X-axis");
@@ -118,15 +119,16 @@ const OverviewPage = () => {
           </tbody>
         </DataTable>
       </Menu>
-
-      <ChartContainer>
-        <BarChart
-          xAxisName={xAxisName}
-          yAxisName={yAxisName}
-          xAxisData={xAxisData}
-          yAxisData={yAxisData}
-        />
-      </ChartContainer>
+      <ContentContainer>
+        <ChartContainer>
+          <BarChart
+            xAxisName={xAxisName}
+            yAxisName={yAxisName}
+            xAxisData={xAxisData}
+            yAxisData={yAxisData}
+          />
+        </ChartContainer>
+      </ContentContainer>
     </FlexColContainer>
   );
 };

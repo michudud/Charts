@@ -7,6 +7,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
+
+  body{
+    background-color: #F5F5F5;
+  }
 `;
 
 export default GlobalStyles;
