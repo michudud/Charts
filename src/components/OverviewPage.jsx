@@ -10,19 +10,22 @@ const OverviewPage = () => {
   const [yAxisName, setYAxisName] = useState("Y-axis");
   const [xAxisData, setXAxisData] = useState([]);
   const [yAxisData, setYAxisData] = useState([]);
+  const [columnsNumber, setColumnsNumber] = useState(6);
 
-  const columnsNumber = 6;
-  useEffect(function tableWithRandomDataSets() {
-    let xData = [];
-    let yData = [];
-    for (let i = 0; i < columnsNumber; i++) {
-      let randomValue = Math.floor(Math.random() * 100 + 1);
-      xData.push(i + 1);
-      yData.push(randomValue);
-    }
-    setXAxisData(xData);
-    setYAxisData(yData);
-  }, []);
+  useEffect(
+    function tableWithRandomDataSets() {
+      let xData = [];
+      let yData = [];
+      for (let i = 0; i < columnsNumber; i++) {
+        let randomValue = Math.floor(Math.random() * 100 + 1);
+        xData.push(i + 1);
+        yData.push(randomValue);
+      }
+      setXAxisData(xData);
+      setYAxisData(yData);
+    },
+    [columnsNumber]
+  );
 
   return (
     <FlexColContainer>
@@ -32,6 +35,7 @@ const OverviewPage = () => {
             <tr>
               <th>Axis</th>
               <th colSpan={columnsNumber}>Data</th>
+              <th>Size</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +43,7 @@ const OverviewPage = () => {
               <td>
                 <input
                   type="text"
-                  defaultValue="X"
+                  defaultValue="X-axis"
                   onChange={(e) => {
                     setXAxisName(e.target.value);
                   }}
@@ -62,12 +66,21 @@ const OverviewPage = () => {
                   </td>
                 );
               })}
+              <td>
+                <button
+                  onClick={() => {
+                    setColumnsNumber(columnsNumber + 1);
+                  }}
+                >
+                  +
+                </button>
+              </td>
             </tr>
             <tr>
               <td>
                 <input
                   type="text"
-                  defaultValue="Y"
+                  defaultValue="Y-axis"
                   onChange={(e) => {
                     setYAxisName(e.target.value);
                   }}
@@ -90,6 +103,17 @@ const OverviewPage = () => {
                   </td>
                 );
               })}
+              <td>
+                <button
+                  onClick={() => {
+                    columnsNumber > 0
+                      ? setColumnsNumber(columnsNumber - 1)
+                      : null;
+                  }}
+                >
+                  -
+                </button>
+              </td>
             </tr>
           </tbody>
         </DataTable>

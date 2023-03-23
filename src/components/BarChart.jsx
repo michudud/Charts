@@ -11,11 +11,23 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
 
   return (
     <svg width="100%" height="100%">
+      <svg y="5px" width="100%" height="20px">
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fill="#404040"
+          font-weight="bold"
+        >
+          Bar Chart
+        </text>
+      </svg>
       <svg
         x="30px"
-        y="30px"
+        y="50px"
         width="calc(100% - 60px)"
-        height="calc(100% - 80px)"
+        height="calc(100% - 100px)"
       >
         <svg y="10px" width="calc(100% - 10px)" height="calc(100% - 10px)">
           {yAxisData.map((dataSet, index) => {
