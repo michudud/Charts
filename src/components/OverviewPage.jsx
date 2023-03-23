@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import BarChart from "./BarChart";
 import { ChartContainer } from "./styles/ChartContainer.styled";
-import { FlexColContainer } from "./styles/Container.styled";
+import { FlexColContainer } from "./styles/FlexContainer.styled";
 import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
 
