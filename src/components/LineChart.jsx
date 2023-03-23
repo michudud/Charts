@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
-  const barWidth = 100 / yAxisData.length;
-  const maxBarHeight = Math.max.apply(Math, yAxisData);
+const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
+  const dataSetWidth = 100 / yAxisData.length;
+  const maxPointHeight = Math.max.apply(Math, yAxisData);
+  const pointSize = "5px";
+  const lineWidth = "3px";
 
   const verticalTextSvg = useRef();
 
@@ -17,7 +19,7 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           fill="#404040"
           fontWeight="bold"
         >
-          Bar Chart
+          Line Chart
         </text>
       </svg>
       <svg
@@ -29,24 +31,36 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
         <svg y="10px" width="calc(100% - 10px)" height="calc(100% - 10px)">
           {yAxisData.map((dataSet, index) => {
             return (
-              <svg
-                x={index * barWidth + "%"}
-                y={100 - (dataSet / maxBarHeight) * 100 + "%"}
-                width={barWidth + "%"}
-                height={(dataSet / maxBarHeight) * 100 + "%"}
-                key={dataSet + "_" + index + "_" + new Date().getTime()}
-              >
-                <rect
-                  x="20%"
-                  y="0"
-                  width="60%"
-                  height="100%"
-                  fill="lightblue"
-                  stroke="silver"
+              <>
+                {index + 1 < yAxisData.length ? (
+                  <line
+                    x1={index * dataSetWidth + dataSetWidth / 2 + "%"}
+                    y1={`calc(${
+                      100 - (dataSet / maxPointHeight) * 100
+                    }% + ${pointSize})`}
+                    x2={(index + 1) * dataSetWidth + dataSetWidth / 2 + "%"}
+                    y2={`calc(${
+                      100 - (yAxisData[index + 1] / maxPointHeight) * 100
+                    }% + ${pointSize})`}
+                    stroke="sandybrown"
+                    strokeWidth={lineWidth}
+                  />
+                ) : null}
+                <circle
+                  key={dataSet + "_" + index + "_" + new Date().getTime()}
+                  cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
+                  cy={`calc(${
+                    100 - (dataSet / maxPointHeight) * 100
+                  }% + ${pointSize})`}
+                  r={pointSize}
+                  fill="peru"
                 />
-              </svg>
+              </>
             );
           })}
+          {/* {allPoints ? (
+            <polyline points={chartPoints} stroke="red" fill="none" />
+          ) : null} */}
         </svg>
         {/* axis */}
         <line
@@ -120,9 +134,9 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           {xAxisData.map((dataSet, index) => {
             return (
               <svg
-                x={index * barWidth + "%"}
+                x={index * dataSetWidth + "%"}
                 y="2px"
-                width={barWidth + "%"}
+                width={dataSetWidth + "%"}
                 height="18px"
                 key={dataSet + "_" + index + "_" + new Date().getTime()}
               >
@@ -145,4 +159,4 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
     </svg>
   );
 };
-export default BarChart;
+export default LineChart;

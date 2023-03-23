@@ -5,6 +5,7 @@ import { FlexColContainer } from "./styles/FlexContainer.styled";
 import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
 import { ContentContainer } from "./styles/ContentContainer.styled";
+import LineChart from "./LineChart";
 
 const OverviewPage = () => {
   const [xAxisName, setXAxisName] = useState("X-axis");
@@ -122,6 +123,14 @@ const OverviewPage = () => {
       <ContentContainer>
         <ChartContainer>
           <BarChart
+            xAxisName={xAxisName}
+            yAxisName={yAxisName}
+            xAxisData={xAxisData}
+            yAxisData={yAxisData}
+          />
+        </ChartContainer>
+        <ChartContainer>
+          <LineChart
             xAxisName={xAxisName}
             yAxisName={yAxisName}
             xAxisData={xAxisData}
