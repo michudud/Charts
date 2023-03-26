@@ -38,7 +38,7 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
               >
                 <rect
                   x="20%"
-                  y="0"
+                  y="1px"
                   width="60%"
                   height="100%"
                   fill="lightblue"

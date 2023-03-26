@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
   const dataSetWidth = 100 / yAxisData.length;
   const maxPointHeight = Math.max.apply(Math, yAxisData);
-  const pointSize = "5px";
+  const pointSize = 5;
   const lineWidth = "3px";
 
   const verticalTextSvg = useRef();
@@ -34,33 +34,40 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
               <>
                 {index + 1 < yAxisData.length ? (
                   <line
+                    key={dataSet + "_" + index + "_" + new Date().getTime()}
                     x1={index * dataSetWidth + dataSetWidth / 2 + "%"}
                     y1={`calc(${
                       100 - (dataSet / maxPointHeight) * 100
-                    }% + ${pointSize})`}
+                    }% + ${pointSize}px)`}
                     x2={(index + 1) * dataSetWidth + dataSetWidth / 2 + "%"}
                     y2={`calc(${
                       100 - (yAxisData[index + 1] / maxPointHeight) * 100
-                    }% + ${pointSize})`}
+                    }% + ${pointSize}px)`}
                     stroke="sandybrown"
                     strokeWidth={lineWidth}
                   />
                 ) : null}
                 <circle
-                  key={dataSet + "_" + index + "_" + new Date().getTime()}
+                  key={dataSet + "__" + index + "_" + new Date().getTime()}
                   cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
                   cy={`calc(${
                     100 - (dataSet / maxPointHeight) * 100
-                  }% + ${pointSize})`}
-                  r={pointSize}
+                  }% + ${pointSize}px)`}
+                  r={`${pointSize}px`}
                   fill="peru"
+                />
+                <circle
+                  key={dataSet + "___" + index + "_" + new Date().getTime()}
+                  cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
+                  cy={`calc(${
+                    100 - (dataSet / maxPointHeight) * 100
+                  }% + ${pointSize}px)`}
+                  r={`${pointSize - 1}px`}
+                  fill="sandybrown"
                 />
               </>
             );
           })}
-          {/* {allPoints ? (
-            <polyline points={chartPoints} stroke="red" fill="none" />
-          ) : null} */}
         </svg>
         {/* axis */}
         <line
