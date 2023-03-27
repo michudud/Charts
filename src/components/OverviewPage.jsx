@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BarChart from "./BarChart";
 import { ChartContainer } from "./styles/ChartContainer.styled";
-import { FlexColContainer } from "./styles/FlexContainer.styled";
+import { FlexColContainer } from "./styles/FlexColContainer.styled";
 import { DataTable } from "./styles/DataTable.styled";
 import { Menu } from "./styles/Menu.styled";
-import { ContentContainer } from "./styles/ContentContainer.styled";
 import LineChart from "./LineChart";
+import { ContentContainer } from "./styles/ContentContainer.styled";
+import { FlexRow } from "./styles/FlexRow.styled";
 
 const OverviewPage = () => {
   const [xAxisName, setXAxisName] = useState("X-axis");
@@ -121,22 +122,24 @@ const OverviewPage = () => {
         </DataTable>
       </Menu>
       <ContentContainer>
-        <ChartContainer>
-          <BarChart
-            xAxisName={xAxisName}
-            yAxisName={yAxisName}
-            xAxisData={xAxisData}
-            yAxisData={yAxisData}
-          />
-        </ChartContainer>
-        <ChartContainer>
-          <LineChart
-            xAxisName={xAxisName}
-            yAxisName={yAxisName}
-            xAxisData={xAxisData}
-            yAxisData={yAxisData}
-          />
-        </ChartContainer>
+        <FlexRow>
+          <ChartContainer>
+            <BarChart
+              xAxisName={xAxisName}
+              yAxisName={yAxisName}
+              xAxisData={xAxisData}
+              yAxisData={yAxisData}
+            />
+          </ChartContainer>
+          <ChartContainer>
+            <LineChart
+              xAxisName={xAxisName}
+              yAxisName={yAxisName}
+              xAxisData={xAxisData}
+              yAxisData={yAxisData}
+            />
+          </ChartContainer>
+        </FlexRow>
       </ContentContainer>
     </FlexColContainer>
   );
