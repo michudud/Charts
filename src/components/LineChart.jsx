@@ -31,10 +31,9 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
         <svg y="10px" width="calc(100% - 10px)" height="calc(100% - 10px)">
           {yAxisData.map((dataSet, index) => {
             return (
-              <>
+              <g key={dataSet + "_" + index + "_" + new Date().getTime()}>
                 {index + 1 < yAxisData.length ? (
                   <line
-                    key={dataSet + "_" + index + "_" + new Date().getTime()}
                     x1={index * dataSetWidth + dataSetWidth / 2 + "%"}
                     y1={`calc(${
                       100 - (dataSet / maxPointHeight) * 100
@@ -48,7 +47,6 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                   />
                 ) : null}
                 <circle
-                  key={dataSet + "__" + index + "_" + new Date().getTime()}
                   cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
                   cy={`calc(${
                     100 - (dataSet / maxPointHeight) * 100
@@ -57,7 +55,6 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                   fill="peru"
                 />
                 <circle
-                  key={dataSet + "___" + index + "_" + new Date().getTime()}
                   cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
                   cy={`calc(${
                     100 - (dataSet / maxPointHeight) * 100
@@ -65,7 +62,7 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                   r={`${pointSize - 1}px`}
                   fill="sandybrown"
                 />
-              </>
+              </g>
             );
           })}
         </svg>
