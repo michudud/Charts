@@ -125,6 +125,7 @@ const OverviewPage = () => {
         <FlexRow>
           <ChartContainer>
             <BarChart
+              chartTitle={"Bar Chart"}
               xAxisName={xAxisName}
               yAxisName={yAxisName}
               xAxisData={xAxisData}
@@ -133,10 +134,24 @@ const OverviewPage = () => {
           </ChartContainer>
           <ChartContainer>
             <LineChart
+              chartTitle={"Line Chart"}
               xAxisName={xAxisName}
               yAxisName={yAxisName}
               xAxisData={xAxisData}
               yAxisData={yAxisData}
+              markers={false}
+            />
+          </ChartContainer>
+        </FlexRow>
+        <FlexRow>
+          <ChartContainer>
+            <LineChart
+              chartTitle={"Line Chart with markers"}
+              xAxisName={xAxisName}
+              yAxisName={yAxisName}
+              xAxisData={xAxisData}
+              yAxisData={yAxisData}
+              markers={true}
             />
           </ChartContainer>
         </FlexRow>

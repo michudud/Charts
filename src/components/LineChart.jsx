@@ -1,6 +1,13 @@
 import React, { useRef } from "react";
 
-const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
+const LineChart = ({
+  chartTitle,
+  xAxisName,
+  yAxisName,
+  xAxisData,
+  yAxisData,
+  markers,
+}) => {
   const dataSetWidth = 100 / yAxisData.length;
   const maxPointHeight = Math.max.apply(Math, yAxisData);
   const pointSize = 5;
@@ -19,7 +26,7 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           fill="#404040"
           fontWeight="bold"
         >
-          Line Chart
+          {chartTitle}
         </text>
       </svg>
       <svg
@@ -46,22 +53,26 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                     strokeWidth={lineWidth}
                   />
                 ) : null}
-                <circle
-                  cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
-                  cy={`calc(${
-                    100 - (dataSet / (maxPointHeight + 5)) * 100
-                  }% - ${pointSize}px)`}
-                  r={`${pointSize}px`}
-                  fill="peru"
-                />
-                <circle
-                  cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
-                  cy={`calc(${
-                    100 - (dataSet / (maxPointHeight + 5)) * 100
-                  }% - ${pointSize}px)`}
-                  r={`${pointSize - 1}px`}
-                  fill="sandybrown"
-                />
+                {markers ? (
+                  <>
+                    <circle
+                      cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
+                      cy={`calc(${
+                        100 - (dataSet / (maxPointHeight + 5)) * 100
+                      }% - ${pointSize}px)`}
+                      r={`${pointSize}px`}
+                      fill="peru"
+                    />
+                    <circle
+                      cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
+                      cy={`calc(${
+                        100 - (dataSet / (maxPointHeight + 5)) * 100
+                      }% - ${pointSize}px)`}
+                      r={`${pointSize - 1}px`}
+                      fill="sandybrown"
+                    />
+                  </>
+                ) : null}
               </g>
             );
           })}

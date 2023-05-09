@@ -1,6 +1,12 @@
 import React, { useRef } from "react";
 
-const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
+const BarChart = ({
+  chartTitle,
+  xAxisName,
+  yAxisName,
+  xAxisData,
+  yAxisData,
+}) => {
   const barWidth = 100 / yAxisData.length;
   const maxBarHeight = Math.max.apply(Math, yAxisData);
 
@@ -17,7 +23,7 @@ const BarChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
           fill="#404040"
           fontWeight="bold"
         >
-          Bar Chart
+          {chartTitle}
         </text>
       </svg>
       <svg
