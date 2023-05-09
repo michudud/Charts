@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
 const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
   const dataSetWidth = 100 / yAxisData.length;
@@ -36,12 +36,12 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                   <line
                     x1={index * dataSetWidth + dataSetWidth / 2 + "%"}
                     y1={`calc(${
-                      100 - (dataSet / maxPointHeight) * 100
-                    }% + ${pointSize}px)`}
+                      100 - (dataSet / (maxPointHeight + 5)) * 100
+                    }% - ${pointSize}px)`}
                     x2={(index + 1) * dataSetWidth + dataSetWidth / 2 + "%"}
                     y2={`calc(${
-                      100 - (yAxisData[index + 1] / maxPointHeight) * 100
-                    }% + ${pointSize}px)`}
+                      100 - (yAxisData[index + 1] / (maxPointHeight + 5)) * 100
+                    }% - ${pointSize}px)`}
                     stroke="sandybrown"
                     strokeWidth={lineWidth}
                   />
@@ -49,16 +49,16 @@ const LineChart = ({ xAxisName, yAxisName, xAxisData, yAxisData }) => {
                 <circle
                   cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
                   cy={`calc(${
-                    100 - (dataSet / maxPointHeight) * 100
-                  }% + ${pointSize}px)`}
+                    100 - (dataSet / (maxPointHeight + 5)) * 100
+                  }% - ${pointSize}px)`}
                   r={`${pointSize}px`}
                   fill="peru"
                 />
                 <circle
                   cx={index * dataSetWidth + dataSetWidth / 2 + "%"}
                   cy={`calc(${
-                    100 - (dataSet / maxPointHeight) * 100
-                  }% + ${pointSize}px)`}
+                    100 - (dataSet / (maxPointHeight + 5)) * 100
+                  }% - ${pointSize}px)`}
                   r={`${pointSize - 1}px`}
                   fill="sandybrown"
                 />
