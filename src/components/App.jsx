@@ -1,4 +1,3 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
 import OverviewPage from "./OverviewPage";
 import GlobalStyles from "./styles/Global";

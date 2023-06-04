@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BarChart from "./BarChart";
 import { ChartContainer } from "./styles/ChartContainer.styled";
 import { FlexColContainer } from "./styles/FlexColContainer.styled";
